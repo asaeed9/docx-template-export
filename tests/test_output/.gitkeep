@@ -1,0 +1,2 @@
+# This file ensures the test_output directory is tracked by git
+# Test outputs will be generated here but are ignored by .gitignore

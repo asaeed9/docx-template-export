@@ -1,0 +1,2 @@
+# This file ensures the fixtures directory is tracked by git
+# Test templates will be generated here but are ignored by .gitignore
