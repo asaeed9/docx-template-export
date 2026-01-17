@@ -1,3 +1,7 @@
+# Copyright © 2024 Ahsan Saeed
+# Licensed under the Apache License, Version 2.0
+# See LICENSE and NOTICE files for details.
+
 """
 Word export service for deterministic document export.
 

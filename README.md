@@ -2,6 +2,12 @@
 
 A standalone Python library for exporting structured content (markdown or plain text) into Word (.docx) templates. This module is **strictly non-generative** - it does not call any LLMs and does not modify wording. It only maps existing content into Word document structures.
 
+## Author
+
+Created and maintained by **Ahsan Saeed**.
+
+This project is designed with a strong focus on determinism, correctness, and enterprise-grade document generation.
+
 ## Features
 
 - **Scalar placeholder replacement**: Replace simple placeholders like `{{document_id}}`, `{{title}}`, etc.
@@ -11,6 +17,17 @@ A standalone Python library for exporting structured content (markdown or plain 
 - **Plain text mode fallback**: Paragraphs only, no structure inference
 - **Combined markdown export**: Exports a combined markdown file (`exported_markdown_content.md`) for content analysis
 - **Flexible field mapping**: Use any placeholder names via `scalar_fields` and `block_fields` dictionaries
+
+## Design Philosophy
+
+This project prioritizes:
+
+- Deterministic and reproducible output
+- Exact content fidelity (no wording changes)
+- Cross-platform Word rendering stability
+- Explicit, manual control over list and layout behavior
+
+Design decisions favor predictability and correctness over feature breadth.
 
 ## List Rendering Approach
 
@@ -227,4 +244,13 @@ This module respects content fidelity: all text is preserved exactly as provided
 
 ## License
 
-[Add your license here]
+Licensed under the Apache License, Version 2.0.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
