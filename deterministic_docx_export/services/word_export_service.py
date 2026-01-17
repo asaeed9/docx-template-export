@@ -65,9 +65,9 @@ from docx.shared import Inches  # type: ignore
 
 from markdown_it import MarkdownIt  # type: ignore
 
-from models.export_config import ListRenderConfig
-from models.export_models import WordExportRequest
-from services.output_path import get_output_dir_for_document, ensure_output_dir_exists
+from deterministic_docx_export.models.export_config import ListRenderConfig
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.services.output_path import get_output_dir_for_document, ensure_output_dir_exists
 
 logger = logging.getLogger(__name__)
 

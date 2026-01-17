@@ -8,9 +8,9 @@ from pathlib import Path
 
 import pytest
 
-from models.export_models import WordExportRequest
-from models.export_config import ListRenderConfig
-from services.word_export_service import export_to_word
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.models.export_config import ListRenderConfig
+from deterministic_docx_export.services.word_export_service import export_to_word
 
 
 class TestBasicExport:

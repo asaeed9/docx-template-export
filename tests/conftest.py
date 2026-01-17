@@ -1,15 +1,10 @@
 """
 Pytest configuration and fixtures for tests.
 """
-import sys
 from pathlib import Path
-
-# Add parent directory to path so we can import the modules
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pytest
 from docx import Document
-from pathlib import Path
 
 
 @pytest.fixture

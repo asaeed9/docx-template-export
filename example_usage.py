@@ -4,15 +4,11 @@ Example usage of the deterministic DOCX export service.
 This script demonstrates how to use the word export functionality with
 dynamic fields for flexible placeholder replacement.
 """
-import sys
 import json
 from pathlib import Path
 
-# Add the parent directory to the path so we can import the modules
-sys.path.insert(0, str(Path(__file__).parent))
-
-from models.export_models import WordExportRequest
-from services.word_export_service import export_to_word
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.services.word_export_service import export_to_word
 
 
 def example_basic():

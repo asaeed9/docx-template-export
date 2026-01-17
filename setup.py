@@ -16,7 +16,8 @@ setup(
     long_description_content_type="text/markdown",
     author="Ahsan Saeed",
     url="https://github.com/ahsansaeed/deterministic-docx-export",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests", "tests.*"]),
+    include_package_data=True,
     python_requires=">=3.8",
     install_requires=[
         "pydantic>=2.0.0",
