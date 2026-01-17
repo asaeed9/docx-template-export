@@ -14,9 +14,8 @@ setup(
     description="A deterministic library for exporting markdown content to Word (.docx) templates",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Your Name",
-    author_email="your.email@example.com",
-    url="https://github.com/yourusername/deterministic-docx-export",
+    author="Ahsan Saeed",
+    url="https://github.com/ahsansaeed/deterministic-docx-export",
     packages=find_packages(),
     python_requires=">=3.8",
     install_requires=[
@@ -27,7 +26,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
