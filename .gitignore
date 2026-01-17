@@ -37,6 +37,9 @@ ENV/
 output/
 *.docx
 *.md
+# But keep README files
+!README.md
+!**/README.md
 
 # Test outputs (keep structure but ignore generated files)
 tests/test_output/*.docx
