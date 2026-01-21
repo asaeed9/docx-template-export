@@ -8,6 +8,20 @@ Created and maintained by **Ahsan Saeed**.
 
 This project is designed with a strong focus on determinism, correctness, and enterprise-grade document generation.
 
+## What's New in v0.2.0
+
+This release focuses on deterministic table rendering and safety hardening:
+
+- **Safe nested Word table rendering**: Tables can now be rendered inside table cells with atomic commit and deterministic fallback to text rendering
+- **Deterministic table formatting**: Tables use Word's built-in styles (Light Grid, Medium Grid 1, Table Grid) with XML border fallback for consistent visual appearance
+- **Multi-run–safe scalar replacement**: Scalar placeholders spanning multiple XML runs are safely replaced in headers, footers, and textboxes
+- **Atomic block placeholder expansion**: Block placeholders use a freeze → validate → mutate model ensuring no partial mutations
+- **Strict container guardrails**: Block expansion is restricted to BODY containers only, preventing unsafe operations in headers/footers/textboxes
+- **Structural integrity guarantees**: Table cells maintain proper XML structure after placeholder replacement
+- **Code quality improvements**: Removal of unused legacy helpers and addition of invariant documentation for maintainability
+
+All changes are fully backward compatible with no breaking API changes.
+
 ## Features
 
 - **Scalar placeholder replacement**: Replace simple placeholders like `{{document_id}}`, `{{title}}`, etc.
@@ -46,13 +60,25 @@ Design decisions favor predictability and correctness over feature breadth.
 
 Very deep nesting (beyond `max_visual_depth`) may reduce readability due to Word layout constraints. This is a limitation of Word document layout, not the export engine. The engine handles deep nesting deterministically according to the configured strategy, but visual clarity may degrade with extreme nesting.
 
+## Compatibility
+
+- **Python**: 3.8+
+- **Tested Platforms**: macOS, Linux
+- **Windows**: Supported (planned for full testing in future releases)
+
 ## Dependencies
 
-- `pydantic` - For data models
-- `python-docx` - For Word document manipulation
-- `markdown-it-py` - For markdown parsing
+- `pydantic>=2.0.0` - For data models
+- `python-docx>=1.1.0` - For Word document manipulation
+- `markdown-it-py>=3.0.0` - For markdown parsing
 
 ## Installation
+
+### From PyPI
+
+```bash
+pip install deterministic-docx-export
+```
 
 ### From Source
 
@@ -60,12 +86,7 @@ Very deep nesting (beyond `max_visual_depth`) may reduce readability due to Word
 git clone <repository-url>
 cd deterministic-docx-export
 pip install -r requirements.txt
-```
-
-### As Package (when published)
-
-```bash
-pip install deterministic-docx-export
+pip install -e .
 ```
 
 ## Testing
@@ -96,12 +117,41 @@ See `tests/README.md` for more details.
 
 ## Usage
 
+### Minimal Example
+
+```python
+from pathlib import Path
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.services.word_export_service import export_to_word
+
+# Create export request
+request = WordExportRequest(
+    scalar_fields={
+        "title": "My Document",
+        "author": "John Doe",
+    },
+    block_fields={
+        "content": "# Introduction\n\nThis is the content with **bold** text.",
+    }
+)
+
+# Export to Word
+result = export_to_word(
+    template_path=Path("template.docx"),
+    request=request,
+    markdown_mode=True,
+    output_path=Path("output.docx"),
+)
+
+print(f"Word file: {result['word_file_path']}")
+```
+
 ### Basic Example
 
 ```python
 from pathlib import Path
-from models.export_models import WordExportRequest
-from services.word_export_service import export_to_word
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.services.word_export_service import export_to_word
 
 # Create export request with dynamic fields
 request = WordExportRequest(
@@ -131,13 +181,56 @@ if result['markdown_files']:
     print(f"Markdown file saved to: {result['markdown_files'][0]}")
 ```
 
+### Configuration Example
+
+```python
+from pathlib import Path
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.models.export_config import ListRenderConfig
+from deterministic_docx_export.services.word_export_service import export_to_word
+
+# Create custom list rendering configuration
+config = ListRenderConfig(
+    max_visual_depth=7,  # Allow up to 7 nesting levels
+    indent_inches_per_level=0.25,
+    hanging_indent_inches=0.25,
+    bullet_glyphs=("•", "◦", "▪", "▫", "▸", "▴", "▾"),
+    deep_bullet_strategy="clamp_last",  # or "cycle" or "textual"
+)
+
+request = WordExportRequest(
+    scalar_fields={"title": "Document with Deep Nesting"},
+    block_fields={
+        "content": """
+# Deep Nested Lists
+
+- Level 1
+  - Level 2
+    - Level 3
+      - Level 4
+        - Level 5
+          - Level 6
+            - Level 7
+        """
+    }
+)
+
+result = export_to_word(
+    template_path=Path("template.docx"),
+    request=request,
+    markdown_mode=True,
+    output_path=Path("output.docx"),
+    config=config,
+)
+```
+
 ### JSON Input Example
 
 ```python
 import json
 from pathlib import Path
-from models.export_models import WordExportRequest
-from services.word_export_service import export_to_word
+from deterministic_docx_export.models.export_models import WordExportRequest
+from deterministic_docx_export.services.word_export_service import export_to_word
 
 # Load from JSON
 with open("data.json", "r") as f:
@@ -242,6 +335,22 @@ This module respects content fidelity: all text is preserved exactly as provided
 - **Word auto-list compatibility**: Lists are not converted to Word's native list objects. This is intentional for stability and determinism.
 - **Rich markdown inside tables**: Inline markdown formatting (bold, italic) inside table cells is not processed. Table cells contain literal text only.
 
+## Versioning Strategy
+
+This project follows [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
+
+- **PATCH** (0.1.x): Bug fixes, documentation improvements, internal optimizations
+- **MINOR** (0.x.0): New features, enhancements, backward-compatible API additions
+- **MAJOR** (x.0.0): Breaking changes, API modifications, changes to deterministic behavior
+
+**Note:** v0.x indicates the API is still evolving. However, **deterministic behavior guarantees will NOT change without a major version bump**.
+
+### Stability Contract
+
+- Deterministic output behavior is guaranteed within the same major version
+- API changes within the same major version maintain backward compatibility
+- Breaking changes require a major version increment
+
 ## License
 
 Licensed under the Apache License, Version 2.0.
@@ -254,3 +363,22 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+See `LICENSE` and `NOTICE` files for full license text and copyright information.
+
+## Publishing
+
+For maintainers: To publish a new version to PyPI:
+
+```bash
+# Clean previous builds
+rm -rf build dist *.egg-info
+
+# Build distribution packages
+python -m build
+
+# Upload to PyPI (requires PyPI API token)
+python -m twine upload dist/*
+```
+
+**Note:** Use PyPI API tokens for authentication. See [PyPI documentation](https://pypi.org/help/#apitoken) for token setup.
