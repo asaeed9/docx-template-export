@@ -2,7 +2,7 @@
 
 A standalone Python library for exporting structured content (markdown or plain text) into Word (.docx) templates. This module is **strictly non-generative** - it does not call any LLMs and does not modify wording. It only maps existing content into Word document structures.
 
-**Note:** This package was formerly known as `deterministic-docx-export`. The old package name is deprecated but remains functional for backward compatibility. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for migration instructions.
+**Note:** This package was formerly known as `deterministic-docx-export`. The old package name is deprecated but remains functional for backward compatibility. The repository has been renamed from `deterministic-docx-export` to `docx-template-export` on GitHub. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for migration instructions.
 
 ## Author
 
@@ -181,8 +181,8 @@ pip install docx-template-export
 ### From Source
 
 ```bash
-git clone https://github.com/asaeed9/deterministic-docx-export
-cd deterministic-docx-export
+git clone https://github.com/asaeed9/docx-template-export
+cd docx-template-export
 pip install -r requirements.txt
 pip install -e .
 ```

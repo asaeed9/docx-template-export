@@ -15,7 +15,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ahsan Saeed",
-    url="https://github.com/asaeed9/deterministic-docx-export",
+    url="https://github.com/asaeed9/docx-template-export",
     packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     python_requires=">=3.8",
