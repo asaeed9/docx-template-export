@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "content": "- Level 1\n  - Level 2\n    - Level 3\n      - Level 4\n        - Level 5\n          - Level 6\n            - Level 7 text must be preserved\n"
+  }
+}

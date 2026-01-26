@@ -27,6 +27,8 @@ All test outputs are saved in `tests/test_output/` for inspection:
 - **Markdown files**: `*_markdown.md` - The exported markdown content (for some tests)
 - **Config files**: `*_config.json` - Configuration used (for config tests)
 
+**Note:** Export summary logs are saved to `{EXPORT_LOG_DIR}/logs/{timestamp}/` (or `{output_dir}/logs/{timestamp}/` if `EXPORT_LOG_DIR` is not set). These log files are gitignored and not committed to the repository.
+
 ## Test Structure
 
 - `test_basic_*.docx` - Basic functionality tests

@@ -1,0 +1,13 @@
+{
+  "scalar_fields": {
+    "document_id": "NESTED-LIST-TEST-001",
+    "title": "Nested List Behavior Test",
+    "author": "Test Suite",
+    "date": "2024-01-21"
+  },
+  "block_fields": {
+    "introduction": "Intro free text paragraph.\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\nMid free text paragraph.\n\n- Bullet L1\n  - Bullet L2\n    - Bullet L3\n\n1. Number L1\n   1. Number L2\n      1. Number L3\n         1. Number L4\n            1. Number L5\n               1. Number L6\n\n- Bullet2 L1\n  - Bullet2 L2\n    - Bullet2 L3\n      - Bullet2 L4\n        - Bullet2 L5\n\n| X | Y |\n|---|---|\n| foo | bar |\n\nFinal free text paragraph.\n",
+    "body": "",
+    "conclusion": ""
+  }
+}

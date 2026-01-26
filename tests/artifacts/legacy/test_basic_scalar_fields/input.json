@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-001",
+    "title": "Test Document",
+    "author": "Test Author",
+    "date": "2024-01-15"
+  },
+  "block_fields": {}
+}

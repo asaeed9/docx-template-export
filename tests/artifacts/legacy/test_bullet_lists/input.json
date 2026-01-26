@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-004",
+    "title": "Bullet Lists Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Bullet Lists\n\n- First item\n- Second item\n  - Nested item 1\n  - Nested item 2\n- Third item\n  - Deep nested item\n                "
+  }
+}

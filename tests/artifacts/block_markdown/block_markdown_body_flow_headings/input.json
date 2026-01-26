@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "introduction": "# Introduction\n\nThis is the intro text.",
+    "body": "## Main Section\n\nBody content here.\n\n### Subsection\n\nMore content.",
+    "conclusion": "## Conclusion\n\nFinal thoughts."
+  }
+}

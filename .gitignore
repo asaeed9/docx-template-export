@@ -60,3 +60,18 @@ Thumbs.db
 .coverage
 htmlcov/
 .tox/
+
+# PyPI credentials (never commit)
+.pypirc
+.pypirc.template
+
+# Export summary logs (timestamped directories)
+logs/
+
+# Temporary files
+*.zip
+
+# Environment variables (may contain secrets)
+.env
+.env.local
+.env.*.local

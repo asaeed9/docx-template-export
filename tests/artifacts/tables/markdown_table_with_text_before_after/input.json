@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "table_content": "Text before table.\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\nText after table.\n"
+  }
+}

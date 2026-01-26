@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-006",
+    "title": "Tables Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Tables\n\n| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Row 1 Col 1 | Row 1 Col 2 | Row 1 Col 3 |\n| Row 2 Col 1 | Row 2 Col 2 | Row 2 Col 3 |\n| Row 3 Col 1 | Row 3 Col 2 | Row 3 Col 3 |\n                "
+  }
+}

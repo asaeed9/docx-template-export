@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-005",
+    "title": "Numbered Lists Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Numbered Lists\n\n1. First item\n2. Second item\n   1. Nested item 1\n   2. Nested item 2\n3. Third item\n                "
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "list_content": "1. Level 1 item\n   1. Level 2 item\n      1. Level 3 item\n   2. Another level 2 item\n2. Another level 1 item\n"
+  }
+}

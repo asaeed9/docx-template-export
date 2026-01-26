@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-001",
+    "title": "Test"
+  },
+  "block_fields": {
+    "introduction": "# Introduction\n\nThis is an introduction."
+  }
+}

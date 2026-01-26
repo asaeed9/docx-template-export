@@ -1,0 +1,36 @@
+{
+  "scalar_fields": {
+    "company_name": "Sentra",
+    "report_year": "2025",
+    "header_box_scalar": "Executive Brief Header",
+    "industry": "Energy & Industrial AI",
+    "region": "Middle East",
+    "revenue_growth": "18.6% YoY",
+    "key_message": "LLM adoption requires deterministic enterprise outputs",
+    "header_block_should_warn": "Executive Brief Header",
+    "footer_block_should_warn": "Footer Block Should Warn",
+    "body_box_scalar": "Body Textbox Scalar Value",
+    "body_box_block_should_warn": "Body Box Block Should Warn",
+    "footer_box_scalar": "Footer Textbox Scalar Value",
+    "deep_markdown_block": "Deep Markdown Content",
+    "revenue_current": "USD 245M",
+    "revenue_previous": "USD 207M",
+    "revenue_note": "Driven by GenAI-enabled productivity gains",
+    "net_income_current": "USD 41M",
+    "net_income_previous": "USD 33M",
+    "net_income_note": "Margin expansion through automation",
+    "ebitda_current": "USD 58M",
+    "ebitda_previous": "USD 49M",
+    "ebitda_note": "Stable cost base, improved utilization",
+    "local_content": "72%",
+    "payment_terms": "Net 45",
+    "document_id": "SD-ERC-2025-07",
+    "author_name": "Ahsan Saeed",
+    "page_number": "1"
+  },
+  "block_fields": {
+    "executive_summary": "# Executive Summary\n\nThis **Executive Brief** demonstrates a *real-world enterprise scenario* where:\n\n- **LLMs generate Markdown** as their natural output\n- Business stakeholders still demand **Microsoft Word**\n- Conversion must be **lossless, deterministic, and review-safe**\n\n### Core Observations\n\n1. Markdown is effectively the *language of AI*\n2. Word remains the *language of business*\n3. A translation layer is unavoidable\n\n> _This paragraph intentionally mixes **bold**, *italic*, and ***bold-italic*** text._\n\n### Summary Table\n\n| Area | Outcome |\n|-----|--------|\n| Accuracy | High |\n| Stability | Deterministic |\n| Post-editing | None |",
+    "recommendations_block": "# Recommendations\n\n## Immediate Actions\n\n- Adopt deterministic DOCX export as **core infrastructure**\n- Prohibit manual Word formatting post-generation\n\n## Short-Term (0–3 months)\n\n1. Standardize executive templates\n   1. Board briefs\n   2. Committee papers\n2. Lock markdown conventions\n\n## Medium-Term (3–9 months)\n\n- Expand to financial models\n- Integrate approval workflows\n\n**Key Principle:** *Never let formatting be subjective.*",
+    "market_analysis_block": "# Market Analysis\n\nThe enterprise AI market shows **strong structural demand**.\n\n### Demand Drivers\n\n- Regulatory pressure\n- Executive decision velocity\n- Auditability requirements\n\n### Nested Signal Analysis\n\n- AI Adoption\n  - Strategy\n    - Governance\n      - Determinism over creativity\n\n### Comparative View\n\n| Region | Adoption |\n|-------|---------|\n| US | High |\n| EU | Medium |\n| ME | Rapidly accelerating |"
+  }
+}

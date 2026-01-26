@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "nested_table_in_cell",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  Table\n    Row\n      Cell\n        Paragraph(\"Outer cell\")\n        Table\n          Row\n            Cell\n              Paragraph(\"Nested\")",
+    "node_count": 5,
+    "max_depth": 3
+  }
+}

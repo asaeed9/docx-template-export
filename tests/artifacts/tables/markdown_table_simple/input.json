@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "table_content": "| Column A | Column B | Column C |\n|----------|----------|----------|\n| Value 1  | Value 2  | Value 3  |\n| Value 4  | Value 5  | Value 6  |\n"
+  }
+}

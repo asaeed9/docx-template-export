@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "list_item_table_first_child",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(bullet)\n    Item\n      Table\n        Row\n          Cell\n            Paragraph(\"Table in list\")",
+    "node_count": 5,
+    "max_depth": 4
+  }
+}

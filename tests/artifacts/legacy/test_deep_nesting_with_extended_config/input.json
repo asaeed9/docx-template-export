@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-DEEP-002",
+    "title": "Deep Nesting Test (Extended Config)"
+  },
+  "block_fields": {
+    "introduction": "\n# Deep Nesting Test (Extended)\n\nThis test uses max_visual_depth=7 to show deeper nesting:\n\n- Level 1\n  - Level 2\n    - Level 3\n      - Level 4\n        - Level 5\n          - Level 6\n            - Level 7\n              - Level 8 (should be clamped to 7)\n                - Level 9 (should be clamped to 7)\n                "
+  }
+}

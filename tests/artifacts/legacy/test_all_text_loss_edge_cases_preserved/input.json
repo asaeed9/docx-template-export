@@ -1,0 +1,13 @@
+{
+  "scalar_fields": {
+    "document_id": "REGRESSION-TEST-001",
+    "title": "Text Loss Regression Test",
+    "author": "Test Suite",
+    "date": "2024-01-21"
+  },
+  "block_fields": {
+    "introduction": "Intro paragraph before list.\n\n- Bullet item one\n- Bullet item two\n\n- Bullet with continuation\n  This paragraph must not be lost.\n\n- Parent bullet\n  - Child bullet level 2\n    - Child bullet level 3 with text\n\n1. Ordered item one\n   - Nested bullet inside ordered list\n     with continuation text\n\nThis has **bold**, *italic*, and **_bold italic_** text.\n\n| Col A | Col B |\n|------|------|\n| Text | **Bold Cell** |\n\nFinal paragraph after all lists.\n",
+    "body": "",
+    "conclusion": ""
+  }
+}

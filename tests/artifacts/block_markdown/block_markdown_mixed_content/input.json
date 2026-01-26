@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "introduction": "# Introduction\n\nThis is a paragraph with **bold** and *italic* text.\n\n- First bullet\n- Second bullet\n",
+    "body": "## Body Section\n\n| Column A | Column B |\n|----------|----------|\n| Value 1  | Value 2  |\n",
+    "conclusion": "## Conclusion\n\nFinal paragraph."
+  }
+}

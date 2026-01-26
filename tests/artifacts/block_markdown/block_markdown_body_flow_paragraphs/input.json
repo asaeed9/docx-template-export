@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "introduction": "This is the introduction paragraph.",
+    "body": "This is the body paragraph with **bold** and *italic* text.",
+    "conclusion": "This is the conclusion paragraph."
+  }
+}

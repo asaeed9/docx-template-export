@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "table_content": "| X | Y |\n|---|---|\n| a | b |\n"
+  }
+}

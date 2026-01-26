@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-DEEP-001",
+    "title": "Deep Nesting Test (Default Config)"
+  },
+  "block_fields": {
+    "introduction": "\n# Deep Nesting Test\n\nThis test verifies that levels beyond 3 are properly handled:\n\n- Level 1 item\n  - Level 2 item\n    - Level 3 item\n      - Level 4 item (should be clamped to 3 with default config)\n        - Level 5 item (should be clamped to 3)\n          - Level 6 item (should be clamped to 3)\n            - Level 7 item (should be clamped to 3)\n                "
+  }
+}

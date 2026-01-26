@@ -1,0 +1,17 @@
+{
+  "scalar_fields": {
+    "document_id": "ALL-FEATURES-001",
+    "title": "All Features Test Document",
+    "author": "Test Author",
+    "version": "2.0.0",
+    "date": "2024-01-18",
+    "page_number": "1",
+    "total_pages": "10",
+    "status": "Draft"
+  },
+  "block_fields": {
+    "introduction": "\n# Introduction\n\nThis is the **introduction** section that should be expanded in the body.\n\n## Features Tested\n\n1. Scalar replacement\n2. Block expansion\n3. Location restrictions\n\n- Feature A\n- Feature B\n                ",
+    "body": "\n## Body Content\n\nThis body content is in a **table cell** and should be expanded.\n\n| Item | Value |\n|------|-------|\n| Test | Passed |\n                ",
+    "conclusion": "\n## Conclusion\n\nThis conclusion is in a textbox and should **NOT** be expanded.\n                "
+  }
+}

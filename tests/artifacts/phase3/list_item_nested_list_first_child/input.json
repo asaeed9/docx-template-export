@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "list_item_nested_list_first_child",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(ordered)\n    Item\n      List(bullet)\n        Item\n          Paragraph(\"Nested item\")",
+    "node_count": 6,
+    "max_depth": 5
+  }
+}

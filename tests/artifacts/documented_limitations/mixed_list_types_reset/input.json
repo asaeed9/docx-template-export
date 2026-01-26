@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "content": "- Bullet A\n- Bullet B\n\n1. Numbered 1\n2. Numbered 2\n\n- Bullet C\n\n1. Numbered 1 (reset)\n2. Numbered 2 (reset)\n"
+  }
+}

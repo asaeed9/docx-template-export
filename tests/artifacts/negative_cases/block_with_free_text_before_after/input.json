@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "summary": "# Summary Section\n\nThis is the summary content with markdown formatting.\n\n## Key Points\n\n- First important point\n- Second important point\n- Third important point\n\n### Details\n\nMore detailed information here with **bold** and *italic* text.\n"
+  }
+}

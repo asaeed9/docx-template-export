@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "content": "# Heading in Cell\n\nThis is a paragraph inside a table cell.\n\n- Bullet item one\n- Bullet item two\n\n1. Numbered item one\n2. Numbered item two\n"
+  }
+}

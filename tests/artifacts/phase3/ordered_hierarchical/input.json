@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "ordered_hierarchical",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(ordered)\n    Item\n      Paragraph(\"Outer 1\")\n      List(ordered)\n        Item\n          Paragraph(\"Mid 1\")\n          List(ordered)\n            Item\n              Paragraph(\"Inner 1\")\n            Item\n              Paragraph(\"Inner 2\")\n        Item\n          Paragraph(\"Mid 2\")\n    Item\n      Paragraph(\"Outer 2\")",
+    "node_count": 16,
+    "max_depth": 7
+  }
+}

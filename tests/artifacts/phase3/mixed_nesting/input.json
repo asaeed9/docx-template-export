@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "mixed_nesting",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(ordered)\n    Item\n      Paragraph(\"Outer ordered 1\")\n      List(bullet)\n        Item\n          Paragraph(\"Mid bullet 1\")\n          List(ordered)\n            Item\n              Paragraph(\"Inner ordered 1\")",
+    "node_count": 10,
+    "max_depth": 7
+  }
+}

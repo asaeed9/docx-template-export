@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "nested_tables_5_levels",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  Table\n    Row\n      Cell\n        Heading(1, \"Level 1: Main Heading\")\n        Paragraph(\"Level 1: Main content before nested table\")\n        Table\n          Row\n            Cell\n              Paragraph(\"Level 2: Introduction paragraph\")\n              Table\n                Row\n                  Cell\n                    Heading(2, \"Level 3 Heading\")\n                    Paragraph(\"Level 3: Introduction\")\n                    Table\n                      Row\n                        Cell\n                          Paragraph(\"Level 4: Before nested table\")\n                          Table\n                            Row\n                              Cell\n                                Paragraph(\"Level 5: Final nested content\")\n                                Paragraph(\"This is the deepest level\")\n                              Cell\n                                Paragraph(\"Level 5: Right cell\")\n                          List(bullet)\n                            Item\n                              Paragraph(\"Level 4 bullet item\")\n                        Cell\n                          Paragraph(\"Level 4: Right cell\")\n                    Paragraph(\"Level 3: After nested table\")\n                  Cell\n                    Paragraph(\"Level 3: Right cell\")\n              Paragraph(\"Level 2: Conclusion paragraph\")\n            Cell\n              Paragraph(\"Level 2: Right cell\")\n        Paragraph(\"Level 1: Main content after nested table\")\n      Cell\n        Paragraph(\"Level 1: Right column\")",
+    "node_count": 25,
+    "max_depth": 7
+  }
+}

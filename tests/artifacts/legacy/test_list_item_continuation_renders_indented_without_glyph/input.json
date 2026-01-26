@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-LIST-CONT-001",
+    "title": "List Continuation Semantics"
+  },
+  "block_fields": {
+    "introduction": "- Item text\n\n  Continuation paragraph"
+  }
+}

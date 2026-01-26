@@ -1,0 +1,13 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-002",
+    "title": "Block Fields Test",
+    "author": "Test Author",
+    "date": "2024-01-15"
+  },
+  "block_fields": {
+    "introduction": "# Introduction\n\nThis is a test introduction.",
+    "body": "## Body\n\nThis is the body content.",
+    "conclusion": "## Conclusion\n\nThis is the conclusion."
+  }
+}

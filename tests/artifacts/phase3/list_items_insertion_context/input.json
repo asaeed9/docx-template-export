@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "list_items_insertion_context",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(ordered)\n    Item\n      Paragraph(\"Item 1\")\n    Item\n      Paragraph(\"Item 2\")\n    Item\n      Paragraph(\"Item 3\")",
+    "node_count": 8,
+    "max_depth": 3
+  }
+}

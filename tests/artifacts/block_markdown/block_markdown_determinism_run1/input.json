@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "introduction": "# Test\n\nContent here.",
+    "body": "- Item 1\n- Item 2",
+    "conclusion": "Final text."
+  }
+}

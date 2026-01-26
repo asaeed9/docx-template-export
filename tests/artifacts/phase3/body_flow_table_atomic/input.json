@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "body_flow_table_atomic",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  Table\n    Row\n      Cell\n        Paragraph(\"Header A\")\n      Cell\n        Paragraph(\"Header B\")\n    Row\n      Cell\n        Paragraph(\"Data 1\")\n      Cell\n        Paragraph(\"Data 2\")",
+    "node_count": 6,
+    "max_depth": 2
+  }
+}

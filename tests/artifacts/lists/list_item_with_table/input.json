@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "list_content": "- Item intro paragraph\n\n  | A | B |\n  |---|---|\n  | 1 | 2 |\n\n  Another continuation paragraph\n\n- Next item\n"
+  }
+}

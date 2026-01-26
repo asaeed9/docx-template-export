@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-007",
+    "title": "Formatting Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Formatting\n\nThis is **bold text** and this is *italic text*.\n\nThis is ***bold and italic*** text.\n\nNormal text with **bold** in the middle and *italic* too.\n                "
+  }
+}

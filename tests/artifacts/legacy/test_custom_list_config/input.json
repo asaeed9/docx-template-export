@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-009",
+    "title": "Custom Config Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Deep Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3\n      - Level 4\n        - Level 5\n          - Level 6 (should cycle)\n            - Level 7 (should cycle)\n                "
+  }
+}

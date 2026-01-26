@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-003",
+    "title": "Headings Test"
+  },
+  "block_fields": {
+    "introduction": "\n# Heading 1\n\n## Heading 2\n\n### Heading 3\n\n#### Heading 4\n                "
+  }
+}

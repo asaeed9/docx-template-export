@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "placeholder_boundary",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  Paragraph(\"Inserted content\")",
+    "node_count": 2,
+    "max_depth": 1
+  }
+}

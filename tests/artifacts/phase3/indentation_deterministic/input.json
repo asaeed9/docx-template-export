@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "indentation_deterministic",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  List(bullet)\n    Item\n      Paragraph(\"Level 1\")\n      List(bullet)\n        Item\n          Paragraph(\"Level 2\")\n          List(bullet)\n            Item\n              Paragraph(\"Level 3\")",
+    "node_count": 10,
+    "max_depth": 7
+  }
+}

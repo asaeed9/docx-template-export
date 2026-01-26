@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-HEADER-FOOTER",
+    "title": "Test Title",
+    "author": "Test Author"
+  },
+  "block_fields": {}
+}

@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "list_content": "- Bullet item one\n- Bullet item two\n\n1. Numbered item one\n2. Numbered item two\n"
+  }
+}

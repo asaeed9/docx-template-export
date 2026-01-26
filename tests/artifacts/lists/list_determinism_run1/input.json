@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "list_content": "- Item A\n- Item B\n- Item C\n"
+  }
+}

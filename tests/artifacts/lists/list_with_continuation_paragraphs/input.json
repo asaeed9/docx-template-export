@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "list_content": "- First item with continuation\n\n  This is a continuation paragraph that must not be lost.\n\n- Second item\n"
+  }
+}

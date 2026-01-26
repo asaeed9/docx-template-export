@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {},
+  "block_fields": {},
+  "_metadata": {
+    "test_name": "golden_order",
+    "note": "Phase III test - DocumentNode constructed directly (not from WordExportRequest)",
+    "tree_structure": "Document\n  Heading(1, \"Test Heading\")\n  Paragraph(\"Intro paragraph\")\n  List(bullet)\n    Item\n      Paragraph(\"Bullet item 1\")\n  List(ordered)\n    Item\n      Paragraph(\"Ordered item 1\")\n  Table\n    Row\n      Cell\n        Paragraph(\"Cell A\")\n      Cell\n        Paragraph(\"Cell B\")\n  Paragraph(\"Final paragraph\")",
+    "node_count": 13,
+    "max_depth": 3
+  }
+}

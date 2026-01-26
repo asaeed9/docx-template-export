@@ -1,0 +1,15 @@
+{
+  "scalar_fields": {
+    "document_id": "GOLDEN-2024-001",
+    "title": "Golden Regression Test Document",
+    "author": "Test Suite",
+    "version": "1.0.0",
+    "page_number": "1"
+  },
+  "block_fields": {
+    "executive_summary": "# Executive Summary\n\nThis document demonstrates comprehensive markdown export capabilities.\n\nKey points:\n- Feature A: Working correctly\n- Feature B: Validated\n- Feature C: Tested thoroughly\n",
+    "introduction": "# Introduction\n\nThis is the introduction section with **bold** and *italic* text.\n\nThe library ensures:\n1. Text fidelity (no text loss)\n2. Determinism (same input ? same output)\n3. Observability (all artifacts written)\n",
+    "main_content": "# Main Content\n\n## Section 1: Lists\n\n### Bullet Lists\n- Level 1 item\n  - Level 2 item\n    - Level 3 item\n  - Another level 2 item\n\n### Numbered Lists\n1. First numbered item\n   1. Nested numbered item\n   2. Another nested item\n2. Second numbered item\n\n## Section 2: Tables\n\n| Component | Status | Notes |\n|-----------|--------|-------|\n| Parser    | OK     | Working correctly |\n| Renderer  | OK     | Validated |\n| Tests     | OK     | Comprehensive |\n\n## Section 3: Mixed Content\n\nThis paragraph appears before a list.\n\n- Mixed bullet item\n- Another bullet item\n\nThis paragraph appears after a list.\n",
+    "conclusion": "# Conclusion\n\nThis golden regression test validates:\n\n1. **Text Fidelity**: All input text appears in output\n2. **Determinism**: Same input produces identical output\n3. **Observability**: All artifacts are written to disk\n\nThe test suite ensures these invariants are never violated.\n"
+  }
+}

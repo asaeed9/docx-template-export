@@ -1,0 +1,13 @@
+{
+  "scalar_fields": {
+    "document_id": "BASELINE-TEST-001",
+    "title": "Block Separation Baseline Test",
+    "author": "Test Suite",
+    "date": "2024-01-21"
+  },
+  "block_fields": {
+    "introduction": "Intro free text paragraph.\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\n- Bullet one\n- Bullet two\n\n1. Number one\n2. Number two\n\nOutro free text paragraph.\n\n| X | Y |\n|---|---|\n| foo | bar |\n",
+    "body": "",
+    "conclusion": ""
+  }
+}

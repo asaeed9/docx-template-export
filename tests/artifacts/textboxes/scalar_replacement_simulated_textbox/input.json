@@ -1,0 +1,7 @@
+{
+  "scalar_fields": {
+    "textbox_id": "TXT-12345",
+    "textbox_title": "Textbox Title"
+  },
+  "block_fields": {}
+}

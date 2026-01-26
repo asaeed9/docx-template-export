@@ -1,0 +1,8 @@
+{
+  "scalar_fields": {
+    "document_id": "HDR-11111",
+    "title": "Header Footer Test",
+    "page_number": "1"
+  },
+  "block_fields": {}
+}

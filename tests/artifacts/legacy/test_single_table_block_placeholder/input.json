@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "summary": "# Summary\n\nThis is a summary with **bold** text.\n\n- Item 1\n- Item 2\n- Item 3"
+  }
+}

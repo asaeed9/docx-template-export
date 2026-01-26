@@ -1,0 +1,9 @@
+{
+  "scalar_fields": {
+    "document_id": "TEST-008",
+    "title": "Plain Text Test"
+  },
+  "block_fields": {
+    "introduction": "\nThis is plain text.\nIt will be split into paragraphs\nbased on blank lines.\n\nNo markdown formatting will be applied.\n                "
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scalar_fields": {
+    "document_id": "DOC-2024-001",
+    "version": "1.0.0",
+    "author": "Ahsan Saeed",
+    "title": "Comprehensive Test Document",
+    "date": "2024-01-18",
+    "page_number": "1",
+    "total_pages": "10",
+    "status": "Final"
+  },
+  "block_fields": {
+    "introduction": "# Introduction\n\nThis document provides a comprehensive overview of the digital transformation initiative.\n\n## Background\n\nThe initiative focuses on modernizing technology infrastructure and improving operational efficiency.\n\n## Objectives\n\n- Enhance digital capabilities\n- Improve process automation\n- Strengthen data analytics",
+    "body": "## Main Content\n\nThis section contains the primary analysis and findings.\n\n### Key Findings\n\n1. **Technology Assessment**: Current infrastructure requires significant upgrades\n2. **Process Analysis**: Multiple opportunities for automation identified\n3. **Resource Planning**: Additional resources needed for implementation\n\n### Recommendations\n\n- Proceed with phased implementation approach\n- Allocate dedicated resources for each phase\n- Establish regular review milestones",
+    "conclusion": "# Conclusion\n\nBased on the comprehensive analysis conducted, we recommend proceeding with the proposed digital transformation initiative."
+  }
+}

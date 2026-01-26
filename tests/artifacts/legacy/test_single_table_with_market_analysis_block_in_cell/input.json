@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "market_analysis_block": "# Market Analysis\n\nThe enterprise AI market shows **strong structural demand** across regions and segments.\n\n## Market Snapshot\n\n| Segment | Trend | Notes |\n|---------|-------|-------|\n| Cloud AI Platforms | Accelerating | Driven by enterprise adoption |\n| On‑Prem Solutions | Stable | Legacy workloads remain |\n| Edge / IoT AI | Emerging | Strong in industrial use cases |\n\n## Key Demand Drivers\n\n- Regulatory pressure around explainability\n- Executive decision velocity and scenario planning\n- Auditability requirements for high‑risk decisions\n\n## Regional Adoption Overview\n\n| Region | Adoption | Maturity |\n|--------|----------|----------|\n| US | High | Consolidating platforms |\n| EU | Medium | Privacy‑first expansion |\n| ME | Rapidly accelerating | Heavy investment in industrial AI |\n\n## Strategic Implications\n\n- Consolidate around **2–3 core platforms**\n- Invest in **governance and monitoring** capabilities\n- Align **use cases** with regulatory roadmaps\n\n## Execution Signals\n\n- Bulletproof data pipelines\n- Clear ownership of AI decision flows\n- Tight feedback loops with business stakeholders\n\nIn summary, the market is structurally favorable for deterministic AI solutions that prioritize governance, stability, and auditability."
+  }
+}

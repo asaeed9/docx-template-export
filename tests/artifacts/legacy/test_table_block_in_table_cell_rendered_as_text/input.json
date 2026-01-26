@@ -1,0 +1,6 @@
+{
+  "scalar_fields": {},
+  "block_fields": {
+    "data_table": "| Name | Amount | Notes |\n|------|--------|-------|\n| Fuel | 12000 | Q1 estimate |\n| Labor | 5000 | Contracted |\n| Materials | 3000 | Pending approval |"
+  }
+}
