@@ -12,6 +12,12 @@ This project is designed with a strong focus on determinism, correctness, and en
 
 ## What's New in v0.3.1
 
+### Package Rename
+
+- **Package renamed**: The package has been renamed from `deterministic-docx-export` to `docx-template-export`
+- **Backward compatibility**: The old package name (`deterministic-docx-export`) continues to work via a compatibility shim (see note at top)
+- **Migration**: See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for migration instructions
+
 ### Bug Fixes
 
 - **Cross-platform table formatting**: Tables now always have explicit XML borders defined, ensuring consistent rendering on Windows Word. Table style "TableGrid" is preferred, and explicit borders are applied even when styles succeed.
