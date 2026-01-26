@@ -7,8 +7,8 @@ dynamic fields for flexible placeholder replacement.
 import json
 from pathlib import Path
 
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.services.word_export_service import export_to_word
 
 
 def example_basic():

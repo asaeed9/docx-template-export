@@ -14,6 +14,27 @@
 
 ---
 
+## v0.3.1
+
+### Package Rename
+
+- **Package renamed**: The package has been renamed from `deterministic-docx-export` to `docx-template-export`
+- **Backward compatibility**: The old package name (`deterministic-docx-export`) remains functional via a compatibility shim that emits deprecation warnings
+- **Import changes**: New code should use `from docx_template_export import ...` instead of `from deterministic_docx_export import ...`
+- **No functional changes**: All functionality, APIs, and behavior remain identical; only the package name has changed
+- **Version consistency**: Both package names report the same version (0.3.1)
+
+### Bug Fixes
+
+- **Cross-platform table formatting**: Tables now always have explicit XML borders defined, ensuring consistent rendering on Windows Word. Table style "TableGrid" is preferred, and explicit borders are applied even when styles succeed (Windows Word requires explicit XML borders for consistent display).
+
+### Backward Compatibility
+
+- Fully backward compatible; all changes are additive
+- No impact on output, control flow, or rendering behavior
+- All existing tests pass unchanged
+- Old package name imports continue to work (with deprecation warnings)
+
 ## v0.3.0
 
 ### Major Feature: Tree-Based Rendering Engine

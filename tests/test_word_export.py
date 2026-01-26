@@ -9,9 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.models.export_config import ListRenderConfig
-from deterministic_docx_export.services.word_export_service import export_to_word, parse_markdown_to_blocks
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.models.export_config import ListRenderConfig
+from docx_template_export.services.word_export_service import export_to_word, parse_markdown_to_blocks
 from tests.test_artifacts_helpers import validate_docx_integrity, save_legacy_test_artifacts, write_legacy_test_artifacts
 
 
@@ -1483,7 +1483,7 @@ class TestHeaderFooterScalarReplacement:
     def test_scalar_in_header_paragraph(self, artifacts_dir, test_output_dir):
         """Test scalar replacement in header paragraph."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create template with header
         doc = Document()
@@ -1513,7 +1513,7 @@ class TestHeaderFooterScalarReplacement:
         
         # Write artifacts to artifacts/legacy/test_scalar_in_header_paragraph/
         # Note: This test uses replace_scalar_placeholders directly, not export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"document_id": "DOC-12345"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_header_paragraph",
@@ -1527,7 +1527,7 @@ class TestHeaderFooterScalarReplacement:
     def test_scalar_in_footer_paragraph(self, artifacts_dir, test_output_dir):
         """Test scalar replacement in footer paragraph."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create template with footer
         doc = Document()
@@ -1556,7 +1556,7 @@ class TestHeaderFooterScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_footer_paragraph/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"page_number": "1"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_footer_paragraph",
@@ -1571,7 +1571,7 @@ class TestHeaderFooterScalarReplacement:
         """Test scalar replacement in header table cell."""
         from docx import Document
         from docx.shared import Inches
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create template with header table
         doc = Document()
@@ -1599,7 +1599,7 @@ class TestHeaderFooterScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_header_table_cell/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"title": "Test Document"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_header_table_cell",
@@ -1614,7 +1614,7 @@ class TestHeaderFooterScalarReplacement:
         """Test scalar replacement in footer table cell."""
         from docx import Document
         from docx.shared import Inches
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create template with footer table
         doc = Document()
@@ -1642,7 +1642,7 @@ class TestHeaderFooterScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_footer_table_cell/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"author": "John Doe"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_footer_table_cell",
@@ -1657,8 +1657,8 @@ class TestHeaderFooterScalarReplacement:
         """Test scalar replacement in headers and footers via export_to_word."""
         import logging
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with header and footer
         doc = Document(str(simple_template))
@@ -1857,7 +1857,7 @@ class TestTextboxScalarReplacement:
     
     def test_scalar_in_body_textbox(self, artifacts_dir, test_output_dir):
         """Test scalar replacement in body textbox."""
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create document with textbox
         doc = self._create_doc_with_textbox("Document: {{document_id}}")
@@ -1888,7 +1888,7 @@ class TestTextboxScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_body_textbox/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"document_id": "TEXTBOX-123"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_body_textbox",
@@ -1901,7 +1901,7 @@ class TestTextboxScalarReplacement:
     
     def test_scalar_in_header_textbox(self, artifacts_dir, test_output_dir):
         """Test scalar replacement in header textbox."""
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create document with header textbox
         doc = self._create_doc_with_textbox("Header: {{title}}", in_header=True)
@@ -1933,7 +1933,7 @@ class TestTextboxScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_header_textbox/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"title": "Header Title"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_header_textbox",
@@ -1946,7 +1946,7 @@ class TestTextboxScalarReplacement:
     
     def test_scalar_in_footer_textbox(self, artifacts_dir, test_output_dir):
         """Test scalar replacement in footer textbox."""
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
         
         # Create document with footer textbox
         doc = self._create_doc_with_textbox("Footer: {{author}}", in_footer=True)
@@ -1978,7 +1978,7 @@ class TestTextboxScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_in_footer_textbox/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"author": "Footer Author"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_in_footer_textbox",
@@ -1997,7 +1997,7 @@ class TestTextboxScalarReplacement:
         - run boundaries preserved (run count unchanged)
         """
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import replace_scalar_placeholders
+        from docx_template_export.services.word_export_service import replace_scalar_placeholders
 
         doc = Document()
         p = doc.add_paragraph()
@@ -2037,7 +2037,7 @@ class TestTextboxScalarReplacement:
         validate_docx_integrity(output_path)
         
         # Write artifacts to artifacts/legacy/test_scalar_replacement_idempotent_across_runs/
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.models.export_models import WordExportRequest
         request = WordExportRequest(scalar_fields={"document_id": "DOC-1"}, block_fields={})
         write_legacy_test_artifacts(
             test_name="test_scalar_replacement_idempotent_across_runs",
@@ -2055,8 +2055,8 @@ class TestBlockPlaceholderRestrictions:
     def test_block_in_header_paragraph_skipped(self, artifacts_dir, test_output_dir, caplog):
         """Test that block placeholder in header paragraph is skipped with warning."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with block placeholder in header
         doc = Document()
@@ -2113,8 +2113,8 @@ class TestBlockPlaceholderRestrictions:
     def test_block_in_footer_paragraph_skipped(self, artifacts_dir, test_output_dir, caplog):
         """Test that block placeholder in footer paragraph is skipped with warning."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with block placeholder in footer
         doc = Document()
@@ -2171,8 +2171,8 @@ class TestBlockPlaceholderRestrictions:
     def test_block_in_textbox_skipped(self, artifacts_dir, test_output_dir, caplog):
         """Test that block placeholder in textbox is skipped with warning."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         from lxml import etree
         
         # Create document with textbox containing block placeholder
@@ -2287,8 +2287,8 @@ class TestBlockPlaceholderRestrictions:
     def test_block_in_body_table_cell_allowed(self, artifacts_dir, test_output_dir):
         """Test that block placeholder in body table cell IS allowed and expanded."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with block placeholder in body table cell
         doc = Document()
@@ -2338,9 +2338,9 @@ class TestBlockPlaceholderRestrictions:
         """Test that markdown table block in table cell leaves cell empty when nested table rendering fails."""
         import logging
         from docx import Document
-        from deterministic_docx_export.services import word_export_service
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services import word_export_service
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with block placeholder in body table cell
         doc = Document()
@@ -2366,7 +2366,7 @@ class TestBlockPlaceholderRestrictions:
 
         # Force nested-table attempt to fail
         def _fake_attempt_render_nested_word_table(*args, **kwargs):
-            logger = logging.getLogger("deterministic_docx_export.services.word_export_service")
+            logger = logging.getLogger("docx_template_export.services.word_export_service")
             logger.info("Nested table could not be rendered safely; cell will remain empty.")
             return False
 
@@ -2426,8 +2426,8 @@ class TestBlockPlaceholderRestrictions:
     
     def test_block_in_body_paragraph_allowed(self, simple_template, artifacts_dir, test_output_dir):
         """Test that block placeholder in body paragraph IS allowed and expanded."""
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Export with block content (existing behavior)
         request = WordExportRequest(
@@ -2469,8 +2469,8 @@ class TestBlockPlaceholderRestrictions:
     def test_block_placeholder_must_occupy_full_paragraph(self, artifacts_dir, test_output_dir, caplog):
         """Test that block placeholder with other text in paragraph is skipped with warning."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create template with block placeholder alongside other text
         doc = Document()
@@ -2665,8 +2665,8 @@ class TestAllFeaturesInOneDocument:
         """
         from docx import Document
         from docx.shared import Inches
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Save template to fixtures directory
         template_path = test_fixtures_dir / "all_features_template.docx"
@@ -2824,8 +2824,8 @@ class TestSingleTableBlockPlaceholder:
     def test_single_table_block_placeholder(self, artifacts_dir, test_output_dir, test_fixtures_dir):
         """Create a template with a single table containing a block placeholder."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create minimal template with single table
         doc = Document()
@@ -2888,8 +2888,8 @@ class TestSingleTableBlockPlaceholder:
     def test_nested_table_render_idempotent(self, artifacts_dir, test_output_dir):
         """Nested table rendering should be idempotent across repeated exports."""
         from docx import Document
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
 
         # Template with table cell block placeholder
         doc = Document()
@@ -2959,8 +2959,8 @@ class TestSingleTableBlockPlaceholder:
         """
         from docx import Document
         from lxml import etree
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
 
         # Template: single table cell with markdown table block placeholder
         doc = Document()
@@ -3033,8 +3033,8 @@ class TestSingleTableBlockPlaceholder:
         """Create a template with a single table cell containing the market_analysis_block."""
         from docx import Document
         from lxml import etree
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
 
         # Create template with single table cell placeholder
         doc = Document()
@@ -3136,8 +3136,8 @@ In summary, the market is structurally favorable for deterministic AI solutions 
         from docx import Document
         from lxml import etree
         import re
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Use the user-created template
         template_path = test_fixtures_dir / "single-table-single-textbox-body-template.docx"
@@ -3440,8 +3440,8 @@ The following key facts have been identified during the analysis:
         from lxml import etree
         from pathlib import Path
         import pytest
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Use the complex template
         template_path = test_fixtures_dir / "complex_word_template.docx"
@@ -3608,8 +3608,8 @@ The following key facts have been identified during the analysis:
         import re
         import json
         from pathlib import Path
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Use the existing template
         template_path = test_fixtures_dir / "all_features_template.docx"
@@ -3894,8 +3894,8 @@ Based on the comprehensive analysis conducted, we recommend proceeding with the 
         import re
         import json
         import pytest
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Use the existing template
         template_path = test_fixtures_dir / "complex_word_template.docx"
@@ -4258,8 +4258,8 @@ The enterprise AI market shows **strong structural demand**.
         import re
         import json
         import pytest
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Use the existing template
         template_path = test_fixtures_dir / "complex_word_template2.docx"
@@ -4625,8 +4625,8 @@ The enterprise AI market shows **strong structural demand**.
         from docx import Document
         from docx.shared import Inches
         from lxml import etree
-        from deterministic_docx_export.services.word_export_service import export_to_word
-        from deterministic_docx_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
         
         # Create a comprehensive template with ALL scenarios
         doc = Document()

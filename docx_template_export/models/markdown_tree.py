@@ -52,7 +52,7 @@ from typing import List, Optional, Literal
 # Reuse FormattedRun from word_export_service
 # Note: This import is safe because word_export_service only imports from this module
 # inside functions (lazy imports), not at module level
-from deterministic_docx_export.services.word_export_service import FormattedRun
+from docx_template_export.services.word_export_service import FormattedRun
 
 
 @dataclass

@@ -77,9 +77,9 @@ from docx.shared import Inches  # type: ignore
 
 from markdown_it import MarkdownIt  # type: ignore
 
-from deterministic_docx_export.models.export_config import ListRenderConfig
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.models.export_summary import (
+from docx_template_export.models.export_config import ListRenderConfig
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.models.export_summary import (
     ExportSummary,
     ScalarReplacement,
     BlockReplacement,
@@ -87,7 +87,7 @@ from deterministic_docx_export.models.export_summary import (
     FallbackEvent,
     WarningEvent,
 )
-from deterministic_docx_export.services.output_path import get_output_dir_for_document, ensure_output_dir_exists
+from docx_template_export.services.output_path import get_output_dir_for_document, ensure_output_dir_exists
 
 logger = logging.getLogger(__name__)
 
@@ -1053,7 +1053,7 @@ def _observe_tree_structure(
     if summary is None:
         return
     
-    from deterministic_docx_export.models.markdown_tree import (
+    from docx_template_export.models.markdown_tree import (
         BlockNode,
         DocumentNode,
         TableNode,
@@ -1141,7 +1141,7 @@ def _extract_block_types_from_tree(tree: "BlockNode") -> List[str]:
     Returns:
         List of block type strings (e.g., ["heading", "paragraph", "bullet_list"])
     """
-    from deterministic_docx_export.models.markdown_tree import (
+    from docx_template_export.models.markdown_tree import (
         DocumentNode,
         HeadingNode,
         ParagraphNode,
@@ -1241,11 +1241,11 @@ def parse_markdown_to_tree(
         return None
     
     if not markdown or not markdown.strip():
-        from deterministic_docx_export.models.markdown_tree import DocumentNode
+        from docx_template_export.models.markdown_tree import DocumentNode
         return DocumentNode(children=[])
     
     try:
-        from deterministic_docx_export.models.markdown_tree import (
+        from docx_template_export.models.markdown_tree import (
             BlockNode,
             DocumentNode,
             HeadingNode,
@@ -1498,7 +1498,7 @@ def dump_markdown_tree(node: "BlockNode", indent: int = 0) -> str:
     Returns:
         Multi-line string representation of the tree structure
     """
-    from deterministic_docx_export.models.markdown_tree import (
+    from docx_template_export.models.markdown_tree import (
         DocumentNode,
         HeadingNode,
         ParagraphNode,
@@ -2609,13 +2609,18 @@ def _try_apply_word_table_style(tbl_elem, doc_body):
     """
     Attempt to apply a Word built-in table style to the table element.
     
-    This function tries to apply Word's built-in table styles in preferred order:
-    "Light Grid", "Medium Grid 1", "Table Grid". These styles provide consistent
-    visual appearance across platforms and are preferred over manual XML formatting.
+    This function tries to apply Word's built-in table styles, preferring "TableGrid"
+    as the primary choice for cross-platform compatibility. This style is widely
+    supported and provides consistent visual appearance across macOS and Windows Word.
+    
+    IMPORTANT: Even when a style is successfully applied, explicit XML borders must
+    still be set (see _apply_xml_table_borders_fallback). Windows Word requires explicit
+    border definitions in the XML, as style-based borders may not render correctly
+    across all document templates and Word versions.
     
     Safety Guarantees:
         - Graceful failure: Returns None if style application fails (no exception)
-        - Style preference order: Tries styles in order of visual quality
+        - Style preference: Prefers "TableGrid" for maximum compatibility
         - Deterministic: Same table structure attempts to try same styles in same order
     
     Args:
@@ -2628,9 +2633,9 @@ def _try_apply_word_table_style(tbl_elem, doc_body):
         The Table object can be used for further formatting (e.g., header row emphasis).
     
     Note:
-        This function uses python-docx's Table object to apply styles, which is
-        the recommended approach for deterministic table formatting. If style
-        application fails, the caller should fall back to XML border formatting.
+        This function uses python-docx's Table object to apply styles. However, style
+        application alone is not sufficient for Windows Word compatibility - explicit
+        XML borders must always be applied as a mandatory fallback.
     """
     if doc_body is None:
         return None
@@ -2639,8 +2644,9 @@ def _try_apply_word_table_style(tbl_elem, doc_body):
         from docx.table import Table
         table = Table(tbl_elem, doc_body)
         
-        # Try styles in preferred order
-        for style_name in ['Light Grid', 'Medium Grid 1', 'Table Grid']:
+        # Prefer "TableGrid" first for maximum cross-platform compatibility
+        # This style is universally supported and provides consistent grid appearance
+        for style_name in ['TableGrid', 'Light Grid', 'Medium Grid 1']:
             try:
                 table.style = style_name
                 return table
@@ -2682,22 +2688,29 @@ def _apply_header_row_emphasis(table_obj):
 
 def _apply_xml_table_borders_fallback(tbl_elem):
     """
-    Apply explicit XML borders as fallback when Word table style cannot be applied.
+    Apply explicit XML borders as mandatory fallback for cross-platform compatibility.
     
-    This function applies explicit XML border formatting to a table when built-in
-    Word styles are not available or cannot be applied. It creates a visible grid
-    with borders on all sides (top, left, bottom, right, inside horizontal, inside vertical).
+    This function applies explicit XML border formatting to a table, ensuring all borders
+    are explicitly defined in the DOCX XML. This is REQUIRED for Windows Word compatibility,
+    as Windows Word requires explicit border definitions in the XML even when table styles
+    are applied. macOS Word may render style-based borders correctly, but Windows Word
+    requires explicit XML borders to display table formatting consistently.
+    
+    IMPORTANT: This function is called even when a table style is successfully applied,
+    because style-based borders may not render correctly on Windows Word across all document
+    templates and Word versions. Explicit XML borders ensure deterministic, cross-platform
+    table formatting.
     
     Safety Guarantees:
-        - Idempotent: If borders already exist, no changes are made
-        - Deterministic: Same table structure attempts to get same border formatting
-        - Fallback-safe: Only creates borders if they don't already exist
+        - Deterministic: Same table structure always gets same border formatting
+        - Cross-platform: Explicit borders ensure Windows Word compatibility
+        - Mandatory: Borders are always applied, even if style was applied successfully
     
-    Why This Approach:
-        When Word built-in styles cannot be applied (e.g., style not available in
-        document template), explicit XML borders ensure tables have visible grid
-        lines. This provides consistent visual appearance across platforms and
-        document templates.
+    Why Explicit Borders Are Required:
+        - Windows Word requires explicit <w:tblBorders> XML elements to display borders
+        - macOS Word may render style-based borders, but this is not guaranteed across templates
+        - Explicit XML borders provide deterministic, platform-independent table formatting
+        - Without explicit borders, tables may appear unformatted (no borders) on Windows Word
     
     Args:
         tbl_elem: XML table element (w:tbl) to format. Must be a valid table element.
@@ -2707,8 +2720,9 @@ def _apply_xml_table_borders_fallback(tbl_elem):
         None. The table element is modified in-place with border formatting.
     
     Note:
-        Border properties are: single line, size 4 (0.5pt), auto color, no spacing.
-        This creates a clean, visible grid that works across all Word versions.
+        Border properties are deterministic: single line, size 4 (0.5pt), auto color, no spacing.
+        All borders (top, bottom, left, right, insideH, insideV) are explicitly defined.
+        This creates a clean, visible grid that works consistently across macOS and Windows Word.
     """
     from docx.oxml.ns import qn
     
@@ -2732,16 +2746,20 @@ def _apply_xml_table_borders_fallback(tbl_elem):
             tbl_borders = child
             break
     
-    # If borders already exist, skip (idempotent behavior)
-    if tbl_borders is not None and len(tbl_borders) > 0:
-        return
-    
+    # Always create/overwrite borders to ensure explicit definitions
+    # This ensures Windows Word compatibility even if borders were partially defined
     if tbl_borders is None:
         # Create tblBorders element
         tbl_borders = tbl_pr.makeelement(qn('w:tblBorders'))
         tbl_pr.append(tbl_borders)
+    else:
+        # Clear existing borders to ensure deterministic, explicit definitions
+        # This ensures all borders are explicitly set with consistent values
+        for border_elem in list(tbl_borders):
+            tbl_borders.remove(border_elem)
     
-    # Define border properties: single line, size 4 (0.5pt), auto color
+    # Define border properties: single line, size 4 (0.5pt), auto color, no spacing
+    # These are deterministic values that work consistently across platforms
     border_attrs = {
         qn('w:val'): 'single',
         qn('w:sz'): '4',
@@ -2749,7 +2767,8 @@ def _apply_xml_table_borders_fallback(tbl_elem):
         qn('w:color'): 'auto',
     }
     
-    # Apply borders to all sides
+    # Apply borders to all sides: top, bottom, left, right, insideH (horizontal), insideV (vertical)
+    # All borders must be explicitly defined for Windows Word compatibility
     border_names = ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']
     for border_name in border_names:
         border_elem = tbl_borders.makeelement(qn(f'w:{border_name}'))
@@ -2762,40 +2781,52 @@ def _apply_default_table_formatting(tbl_elem, doc_body=None):
     """
     Apply default visible grid formatting to a Word table XML element.
     
-    This function attempts to provide deterministic table formatting by attempting to apply
-    Word built-in styles first, then falling back to explicit XML borders if needed.
-    This attempts to ensure tables have visible grid lines where supported, subject to
-    document template and Word version constraints.
+    This function provides deterministic, cross-platform table formatting by:
+    1. Attempting to apply Word built-in table style ("TableGrid" preferred)
+    2. ALWAYS applying explicit XML borders as mandatory fallback
+    
+    IMPORTANT: Explicit XML borders are ALWAYS applied, even when a table style is
+    successfully applied. This is required for Windows Word compatibility, as Windows
+    Word requires explicit border definitions in the XML to display table formatting
+    correctly. macOS Word may render style-based borders, but explicit XML borders ensure
+    consistent rendering across all platforms and document templates.
     
     Formatting Strategy:
-        1. Try built-in Word styles in order: "Light Grid", "Medium Grid 1", "Table Grid"
-        2. If style succeeds, also make header row text bold
-        3. If style fails or doc_body is None, apply explicit XML borders as fallback
+        1. Try built-in Word styles in order: "TableGrid" (preferred), "Light Grid", "Medium Grid 1"
+        2. If style succeeds, make header row text bold
+        3. ALWAYS apply explicit XML borders (mandatory for Windows Word compatibility)
+        4. If style fails or doc_body is None, still apply explicit XML borders
     
     Safety Guarantees:
-        - Deterministic: Same table structure attempts to get same formatting
-        - Graceful fallback: XML borders attempt to ensure tables are visible where supported
-        - Cross-platform: Attempts to work across Word versions and template styles
+        - Deterministic: Same table structure always gets same formatting
+        - Cross-platform: Explicit borders ensure Windows Word compatibility
+        - Mandatory borders: Borders are always explicitly defined in XML
+        - Style + borders: Style provides visual enhancement, borders provide compatibility
     
     Args:
         tbl_elem: XML table element (w:tbl) to format. Must be a valid table element.
         doc_body: Optional document body element (python-docx internal: doc._body)
             for style application via Table object. If None, skips style application
-            and goes directly to XML border fallback.
+            but still applies explicit XML borders.
     
     Returns:
         None. The table element is modified in-place with formatting.
     
     Note:
-        This function attempts to ensure tables have visible formatting, either through
-        Word styles (preferred) or XML borders (fallback). This attempts to provide consistent
-        visual appearance and deterministic output, subject to DOCX constraints.
+        This function ensures tables have visible formatting on both macOS and Windows Word.
+        The combination of table style (when available) and explicit XML borders provides
+        maximum compatibility and consistent visual appearance across platforms.
     """
+    # Try to apply table style first (prefers "TableGrid" for compatibility)
     table_obj = _try_apply_word_table_style(tbl_elem, doc_body)
     if table_obj is not None:
         _apply_header_row_emphasis(table_obj)
-        return
     
+    # ALWAYS apply explicit XML borders, even if style was applied successfully
+    # This is mandatory for Windows Word compatibility - Windows Word requires explicit
+    # border definitions in the XML, even when table styles are applied. macOS Word may
+    # render style-based borders correctly, but explicit XML borders ensure consistent
+    # cross-platform rendering across all document templates and Word versions.
     _apply_xml_table_borders_fallback(tbl_elem)
 
 
@@ -3900,8 +3931,8 @@ def export_to_word(
     Example:
         ```python
         from pathlib import Path
-        from deterministic_docx_export.models.export_models import WordExportRequest
-        from deterministic_docx_export.services.word_export_service import export_to_word
+        from docx_template_export.models.export_models import WordExportRequest
+        from docx_template_export.services.word_export_service import export_to_word
         
         request = WordExportRequest(
             scalar_fields={"title": "My Document", "author": "John Doe"},
@@ -4198,7 +4229,7 @@ def export_to_word(
             
             if USE_MARKDOWN_TREE_RENDERER and markdown_mode:
                 # Use tree-based rendering
-                from deterministic_docx_export.renderers.tree_renderer import (
+                from docx_template_export.renderers.tree_renderer import (
                     render_markdown_tree_to_docx,
                 )
                 tree = parse_markdown_to_tree(content, enabled=True, summary=summary)

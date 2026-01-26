@@ -40,7 +40,7 @@ from docx.shared import Inches, Pt  # type: ignore
 from docx.oxml import parse_xml  # type: ignore
 from docx.oxml.ns import nsdecls, qn  # type: ignore
 
-from deterministic_docx_export.models.markdown_tree import (
+from docx_template_export.models.markdown_tree import (
     BlockNode,
     DocumentNode,
     HeadingNode,
@@ -51,7 +51,7 @@ from deterministic_docx_export.models.markdown_tree import (
     TableRowNode,
     TableCellNode,
 )
-from deterministic_docx_export.models.export_config import ListRenderConfig
+from docx_template_export.models.export_config import ListRenderConfig
 
 logger = logging.getLogger(__name__)
 
@@ -390,7 +390,7 @@ def render_heading_node(
         Number of top-level elements inserted (always 1 for heading).
         This count is used by callers to update insertion_index.
     """
-    from deterministic_docx_export.services.word_export_service import (
+    from docx_template_export.services.word_export_service import (
         _heading_style_for_level,
         _set_paragraph_formatted_text,
     )
@@ -443,7 +443,7 @@ def render_paragraph_node(
         Number of top-level elements inserted (0 if empty paragraph, 1 otherwise).
         This count is used by callers to update insertion_index.
     """
-    from deterministic_docx_export.services.word_export_service import (
+    from docx_template_export.services.word_export_service import (
         _set_paragraph_formatted_text,
     )
     
@@ -749,7 +749,7 @@ def _create_table_atomic(
                     render_node(child, scratch_doc, cell_context, None, None)
         
         # Apply formatting BEFORE cloning (using scratch document context)
-        from deterministic_docx_export.services.word_export_service import (
+        from docx_template_export.services.word_export_service import (
             _apply_default_table_formatting,
         )
         _apply_default_table_formatting(scratch_table._tbl, scratch_doc._body)
@@ -889,7 +889,7 @@ def render_table_node(
     
     if cell is not None:
         # Nested table: use existing proven-safe nested table rendering logic
-        from deterministic_docx_export.services.word_export_service import (
+        from docx_template_export.services.word_export_service import (
             _attempt_render_nested_word_table,
             MarkdownBlock,
         )

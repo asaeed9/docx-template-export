@@ -14,7 +14,7 @@ from docx import Document
 from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls, qn
 
-from deterministic_docx_export.models.export_models import WordExportRequest
+from docx_template_export.models.export_models import WordExportRequest
 from tests.test_artifacts_helpers import (
     run_export_and_collect_artifacts,
     assert_text_fidelity,

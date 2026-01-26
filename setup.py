@@ -1,5 +1,5 @@
 """
-Setup configuration for deterministic-docx-export package.
+Setup configuration for docx-template-export package.
 """
 from setuptools import setup, find_packages
 from pathlib import Path
@@ -9,13 +9,13 @@ readme_file = Path(__file__).parent / "README.md"
 long_description = readme_file.read_text(encoding="utf-8") if readme_file.exists() else ""
 
 setup(
-    name="deterministic-docx-export",
-    version="0.3.0",
+    name="docx-template-export",
+    version="0.3.1",
     description="A deterministic library for exporting markdown content to Word (.docx) templates",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ahsan Saeed",
-    url="https://github.com/ahsansaeed/deterministic-docx-export",
+    url="https://github.com/asaeed9/deterministic-docx-export",
     packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     python_requires=">=3.8",

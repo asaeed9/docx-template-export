@@ -12,7 +12,7 @@ import pytest
 from pathlib import Path
 from docx import Document
 
-from deterministic_docx_export.models.export_models import WordExportRequest
+from docx_template_export.models.export_models import WordExportRequest
 from tests.test_artifacts_helpers import (
     run_export_and_collect_artifacts,
     extract_all_text_from_docx,

@@ -1,12 +1,20 @@
-# Deterministic DOCX Export
+# docx-template-export
 
 A standalone Python library for exporting structured content (markdown or plain text) into Word (.docx) templates. This module is **strictly non-generative** - it does not call any LLMs and does not modify wording. It only maps existing content into Word document structures.
+
+**Note:** This package was formerly known as `deterministic-docx-export`. The old package name is deprecated but remains functional for backward compatibility. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for migration instructions.
 
 ## Author
 
 Created and maintained by **Ahsan Saeed**.
 
 This project is designed with a strong focus on determinism, correctness, and enterprise-grade document generation.
+
+## What's New in v0.3.1
+
+### Bug Fixes
+
+- **Cross-platform table formatting**: Tables now always have explicit XML borders defined, ensuring consistent rendering on Windows Word. Table style "TableGrid" is preferred, and explicit borders are applied even when styles succeed.
 
 ## What's New in v0.3.0
 
@@ -19,7 +27,7 @@ This release introduces a new tree-based rendering engine enabled by default, al
 #### Tree-Based Rendering (Enabled by Default)
 
 - **Tree-Based Renderer**: New tree-based rendering engine that preserves exact order and nesting of markdown elements (lists, list items, tables, table cells)
-- **Enabled by Default**: Tree renderer is enabled by default in v0.3.0. Can be disabled via `USE_MARKDOWN_TREE_RENDERER` environment variable (set to `"false"` to disable)
+- **Enabled by Default**: Tree renderer is enabled by default in v0.3.1. Can be disabled via `USE_MARKDOWN_TREE_RENDERER` environment variable (set to `"false"` to disable)
 - **Enhanced Structure Preservation**: Tree renderer attempts to preserve semantic structure without flattening, allowing for more accurate rendering of complex nested structures
 - **Graceful Fallback**: Tree parsing failures automatically fall back to block-based renderer to ensure export completion
 - **Safety Parity**: Tree renderer provides similar safety guarantees as block-based renderer (atomic operations, freeze → validate → mutate)
@@ -41,7 +49,7 @@ This release introduces a new tree-based rendering engine enabled by default, al
 
 ### Environment Variables
 
-Three new environment variables are introduced in v0.3.0:
+Three environment variables control export behavior (introduced in v0.3.0, updated in v0.3.1):
 
 - **`OUTPUT_DIRECTORY`**: Base directory for output files
   - Default: Not set (relative paths resolved relative to current working directory)
@@ -50,7 +58,7 @@ Three new environment variables are introduced in v0.3.0:
   - Useful for centralizing all exported documents in a single location
 
 - **`USE_MARKDOWN_TREE_RENDERER`**: Control tree-based rendering engine (default: `True` - enabled)
-  - Default: `True` - Tree renderer is enabled by default in v0.3.0
+  - Default: `True` - Tree renderer is enabled by default
   - Set to `"false"`, `"0"`, or `"no"` to disable and use block-based rendering
   - When enabled (default), the library uses tree-based parsing and rendering for block placeholders
   - When disabled, uses block-based rendering (legacy behavior)
@@ -92,7 +100,7 @@ All changes are fully backward compatible with no breaking API changes.
 This release focuses on deterministic table rendering and safety hardening:
 
 - **Safe nested Word table rendering**: Tables can now be rendered inside table cells with atomic commit and deterministic fallback to text rendering
-- **Deterministic table formatting**: Tables use Word's built-in styles (Light Grid, Medium Grid 1, Table Grid) with XML border fallback for consistent visual appearance
+- **Deterministic table formatting**: Tables use Word's built-in styles (TableGrid preferred) with explicit XML borders always applied for cross-platform compatibility (Windows Word requires explicit borders)
 - **Multi-run–safe scalar replacement**: Scalar placeholders spanning multiple XML runs are safely replaced in headers, footers, and textboxes
 - **Atomic block placeholder expansion**: Block placeholders use a freeze → validate → mutate model ensuring no partial mutations
 - **Strict container guardrails**: Block expansion is restricted to BODY containers only, preventing unsafe operations in headers/footers/textboxes
@@ -159,13 +167,15 @@ Very deep nesting (beyond `max_visual_depth`) may reduce readability due to Word
 ### From PyPI
 
 ```bash
-pip install deterministic-docx-export
+pip install docx-template-export
 ```
+
+**Note**: If you're using the old package name (`deterministic-docx-export`), it will continue to work but is deprecated. Please migrate to `docx-template-export`. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for details.
 
 ### From Source
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/asaeed9/deterministic-docx-export
 cd deterministic-docx-export
 pip install -r requirements.txt
 pip install -e .
@@ -195,6 +205,9 @@ Run the test suite to verify functionality and inspect outputs:
 # Install test dependencies
 pip install -r requirements.txt
 
+# Note: For development, you can also install the package in editable mode:
+# pip install -e .
+
 # Run all tests
 pytest tests/
 
@@ -219,8 +232,8 @@ See `tests/README.md` for more details.
 
 ```python
 from pathlib import Path
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.services.word_export_service import export_to_word
 
 # Create export request
 request = WordExportRequest(
@@ -250,8 +263,8 @@ print(f"Word file: {result['word_file_path']}")
 
 ```python
 from pathlib import Path
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.services.word_export_service import export_to_word
 
 # Create export request with dynamic fields
 request = WordExportRequest(
@@ -287,9 +300,9 @@ if result['markdown_files']:
 
 ```python
 from pathlib import Path
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.models.export_config import ListRenderConfig
-from deterministic_docx_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.models.export_config import ListRenderConfig
+from docx_template_export.services.word_export_service import export_to_word
 
 # Create custom list rendering configuration
 config = ListRenderConfig(
@@ -331,8 +344,8 @@ result = export_to_word(
 ```python
 import json
 from pathlib import Path
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.services.word_export_service import export_to_word
 
 # Load from JSON
 with open("data.json", "r") as f:
@@ -405,6 +418,17 @@ When `markdown_mode=True`, the following markdown structures are supported:
 - **Numbered lists**: `1.` for ordered lists
 - **Tables**: Markdown table syntax
 - **Inline formatting**: `**bold**` and `*italic*` text (in headings and paragraphs, not in table cells)
+- **Fenced code blocks**: Triple backtick code blocks (e.g., ` ```python` ... ` ``` `) are rendered verbatim as plain text paragraphs
+- **Inline code**: Backtick-wrapped code (e.g., `` `code` ``) is rendered as plain text with backticks removed
+- **Blockquotes**: `>` prefixed paragraphs are rendered as regular paragraphs
+
+### Code Blocks and Quotes
+
+**Fenced Code Blocks**: Fenced code blocks are rendered verbatim with no escaping, validation, normalization, or correction applied. Quotes (single, double, escaped), apostrophes, backticks, and language-specific syntax are preserved exactly as provided. Invalid JSON, Python, or other code is rendered as-is without modification.
+
+**Inline Code**: Inline code preserves text exactly. Backticks are markdown syntax and are not rendered literally in the output.
+
+**Quotes**: Quotes inside normal text, blockquotes, and code blocks are preserved exactly. No smart-quote conversion or typography normalization is applied. The exporter does not modify punctuation.
 
 ### Table Behavior
 
@@ -472,7 +496,7 @@ Export summaries are automatically saved to timestamped directories:
 
 Three environment variables control export behavior:
 
-**`OUTPUT_DIRECTORY`**: Base directory for output files (new in v0.3.0)
+**`OUTPUT_DIRECTORY`**: Base directory for output files (introduced in v0.3.0)
 
 - Default: Not set (output paths resolved relative to current working directory)
 - If set: Relative `output_path` parameters are resolved relative to this directory
@@ -482,7 +506,7 @@ Three environment variables control export behavior:
 
 **`USE_MARKDOWN_TREE_RENDERER`**: Control tree-based rendering engine (enabled by default)
 
-- Default: `True` (tree renderer is enabled by default in v0.3.0)
+- Default: `True` (tree renderer is enabled by default)
 - Set to `"false"`, `"0"`, or `"no"` to disable and use block-based rendering (legacy behavior)
 - When enabled (default), block placeholders are processed using the tree-based renderer
 - Tree renderer provides enhanced structure preservation for complex nested markdown

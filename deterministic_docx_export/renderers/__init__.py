@@ -1,23 +1,24 @@
-# Copyright ù 2024 Ahsan Saeed
-# Licensed under the Apache License, Version 2.0
-# See LICENSE and NOTICE files for details.
-
 """
-Renderers for markdown tree to DOCX conversion.
+Compatibility shim for deterministic_docx_export.renderers.
 
-This package provides rendering implementations that attempt to convert parsed markdown
-structures into Word document elements. The tree-based renderer is an experimental,
-feature-flagged component that attempts to preserve nesting and order of markdown elements
-where structurally safe.
-
-Main Renderers:
-- tree_renderer: Experimental tree-based renderer that processes markdown tree structures
-    (DocumentNode, ListNode, etc.) and attempts to render them to Word documents with
-    order and nesting preservation where supported. This is feature-flagged and runs
-    in parallel to the block-based renderer (which remains the default).
-
-The tree renderer attempts to provide safety parity with the block-based renderer:
-- Similar safety invariants (atomic operations, freeze ? validate ? mutate) where applicable
-- Similar list rendering semantics (manual glyph/numbering, no Word numbering XML) where supported
-- Graceful fallback to block-based renderer on parsing failures or unsupported structures
+This module re-exports everything from docx_template_export.renderers.
 """
+
+import warnings
+import sys
+
+warnings.warn(
+    "The package 'deterministic-docx-export' has been renamed to 'docx-template-export'. "
+    "Please update your imports from 'deterministic_docx_export' to 'docx_template_export'. "
+    "The old package name will be removed in a future version.",
+    DeprecationWarning,
+    stacklevel=2
+)
+
+# Import and re-export everything from the new package
+from docx_template_export.renderers import *
+
+# Make submodules importable: from deterministic_docx_export.renderers.tree_renderer import ...
+import docx_template_export.renderers.tree_renderer as tree_renderer
+
+sys.modules['deterministic_docx_export.renderers.tree_renderer'] = tree_renderer

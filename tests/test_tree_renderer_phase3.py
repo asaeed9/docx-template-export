@@ -26,8 +26,8 @@ from docx import Document  # type: ignore
 from docx.document import Document as DocumentType  # type: ignore
 from docx.oxml.ns import qn  # type: ignore
 
-from deterministic_docx_export.models.export_config import ListRenderConfig
-from deterministic_docx_export.models.markdown_tree import (
+from docx_template_export.models.export_config import ListRenderConfig
+from docx_template_export.models.markdown_tree import (
     BlockNode,
     DocumentNode,
     HeadingNode,
@@ -38,12 +38,12 @@ from deterministic_docx_export.models.markdown_tree import (
     TableRowNode,
     TableCellNode,
 )
-from deterministic_docx_export.renderers.tree_renderer import (
+from docx_template_export.renderers.tree_renderer import (
     render_markdown_tree_to_docx,
     MAX_TREE_DEPTH,
     MAX_NODE_COUNT,
 )
-from deterministic_docx_export.services.word_export_service import FormattedRun, dump_markdown_tree, parse_markdown_to_tree
+from docx_template_export.services.word_export_service import FormattedRun, dump_markdown_tree, parse_markdown_to_tree
 
 
 # ============================================================================

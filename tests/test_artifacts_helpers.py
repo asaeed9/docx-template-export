@@ -11,9 +11,9 @@ from docx import Document
 from docx.table import Table
 from docx.text.paragraph import Paragraph
 
-from deterministic_docx_export.models.export_models import WordExportRequest
-from deterministic_docx_export.services.word_export_service import export_to_word
-from deterministic_docx_export.models.export_config import ListRenderConfig
+from docx_template_export.models.export_models import WordExportRequest
+from docx_template_export.services.word_export_service import export_to_word
+from docx_template_export.models.export_config import ListRenderConfig
 from typing import Dict, Any
 
 
@@ -298,7 +298,7 @@ def extract_all_text_from_docx(docx_path: Path) -> str:
 def _extract_paragraph_text(paragraph: Paragraph) -> str:
     """Extract text from a paragraph, including list markers."""
     # Use XML-based extraction for consistency with library
-    from deterministic_docx_export.services.word_export_service import _get_text_from_xml_run
+    from docx_template_export.services.word_export_service import _get_text_from_xml_run
     
     parts: list[str] = []
     for run in paragraph.runs:
