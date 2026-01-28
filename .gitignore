@@ -37,9 +37,13 @@ ENV/
 output/
 *.docx
 *.md
-# But keep README files
+# But keep README files and top-level docs
 !README.md
 !**/README.md
+!CHANGELOG.md
+!OBSERVABILITY.md
+!MIGRATION_GUIDE.md
+!PACKAGE_RENAME_SUMMARY.md
 
 # Test outputs (keep structure but ignore generated files)
 tests/test_output/*.docx
