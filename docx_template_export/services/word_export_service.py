@@ -1701,10 +1701,36 @@ def _iter_textbox_runs(doc: DocumentType, region: Optional[Region] = None) -> It
                     yield (runs, region, Container.TEXTBOX)
 
 
+def _iter_all_body_table_paragraphs(doc: DocumentType) -> Iterable[Paragraph]:
+    """
+    Yield every paragraph inside any table cell in the document body,
+    at any nesting depth.
+
+    python-docx's doc.tables returns only top-level w:tbl elements (direct children
+    of w:body), and cell.paragraphs returns only direct child w:p elements of w:tc.
+    Both use findall(), which is shallow.  Templates that place scalar placeholders
+    inside nested tables (e.g. an inner table inside an outer table cell) are therefore
+    invisible to the old traversal loop.
+
+    This helper uses body.iter(qn('w:tc')) to visit every w:tc element at any nesting
+    depth in a single depth-first pass, then yields only direct-child w:p elements of
+    each cell (via findall).  Because findall is shallow, each paragraph is reached
+    exactly once — from the cell that directly owns it — regardless of how deeply
+    nested that cell is.
+    """
+    from docx.oxml.ns import qn
+    body = doc.element.body
+    tc_tag = qn('w:tc')
+    p_tag = qn('w:p')
+    for tc_elem in body.iter(tc_tag):
+        for p_elem in tc_elem.findall(p_tag):
+            yield Paragraph(p_elem, doc)
+
+
 def _iter_all_locations(doc: DocumentType) -> Iterable[Tuple[Union[Paragraph, List[Any]], Region, Container]]:
     """
     Yield all content locations in the document with location metadata.
-    
+
     Returns tuples of (paragraph_or_runs, region, container):
     - paragraph_or_runs: Paragraph object for FLOW/TABLE, or list of XML run elements for TEXTBOX
     - region: BODY, HEADER, or FOOTER
@@ -1717,14 +1743,12 @@ def _iter_all_locations(doc: DocumentType) -> Iterable[Tuple[Union[Paragraph, Li
             continue
         logger.debug("Traversing BODY FLOW paragraph")
         yield (p, Region.BODY, Container.FLOW)
-    
-    # Body table cells (TABLE)
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for p in cell.paragraphs:
-                    logger.debug("Traversing BODY TABLE cell paragraph")
-                    yield (p, Region.BODY, Container.TABLE)
+
+    # Body table cells (TABLE) — _iter_all_body_table_paragraphs visits every
+    # w:tc at any nesting depth, so placeholders inside nested tables are reached.
+    for p in _iter_all_body_table_paragraphs(doc):
+        logger.debug("Traversing BODY TABLE cell paragraph")
+        yield (p, Region.BODY, Container.TABLE)
     
     # Header and footer paragraphs and table cells
     for p, region in _iter_header_footer_paragraphs(doc):

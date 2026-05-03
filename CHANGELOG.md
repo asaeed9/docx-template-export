@@ -14,6 +14,36 @@
 
 ---
 
+## v0.3.2
+
+### Bug Fixes
+
+- **Fix scalar replacement in nested Word tables**: Scalar placeholders (e.g. `{{title}}`,
+  `{{department}}`) that live inside tables nested within other table cells were silently
+  skipped during replacement.  The root cause was that `doc.tables` (python-docx) returns
+  only top-level `w:tbl` elements and `cell.paragraphs` returns only direct-child `w:p`
+  elements, so any table cell at nesting depth ≥ 2 was never visited.  The fix introduces
+  a private helper `_iter_all_body_table_paragraphs` that uses `body.iter(qn('w:tc'))` to
+  walk every table cell at any depth and yields only direct-child paragraphs of each cell,
+  ensuring each paragraph is visited exactly once.  No public API change.
+
+### Tests Added
+
+- `test_scalar_replacement_in_nested_table` — 2-level nested table
+- `test_scalar_replacement_in_doubly_nested_table` — 3-level nested table
+- `test_scalar_nested_replacement_no_duplication` — placeholder replaced exactly once per occurrence
+- `test_scalar_flat_table_regression` — flat table replacement still works (regression guard)
+- `test_scalar_replacement_intellectus_exec_brief_template` — integration test against the
+  real `executive_decision_brief_template_v4.docx` template (auto-skipped when template absent)
+
+### Backward Compatibility
+
+- Fully backward compatible; no public API change
+- Flat-table scalar replacement behavior is unchanged
+- All existing tests pass unchanged
+
+---
+
 ## v0.3.1
 
 ### Package Rename
