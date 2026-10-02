@@ -1,0 +1,11 @@
+{
+  "scalar_fields": {
+    "title": "Q3 Infrastructure Upgrade",
+    "department": "Engineering",
+    "presenter": "Jane Smith",
+    "date": "2026-05-03",
+    "priority": "High",
+    "audience": "Executive Committee"
+  },
+  "block_fields": {}
+}
